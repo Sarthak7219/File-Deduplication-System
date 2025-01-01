@@ -6,6 +6,7 @@ This system optimizes storage by eliminating data redundancy across various file
 
 ## Features
 
+- **Duplicate File Removal**: Automatically detects and removes duplicate files by referencing unique data blocks stored in the database.
 - **Block-level Deduplication**: Files are divided into 4KB blocks, and only unique blocks are stored, ensuring efficient storage usage.
 - **Support for Multiple File Types**: Handles various file formats, including text, PDFs, images, and audio files.
 - **SHA-256 Hashing**: Ensures data integrity and uniqueness by generating SHA-256 hashes for each block.
