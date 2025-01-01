@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>File Deduplication</title>
+    <style>
+        .stats,
+        .files {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>File Deduplication System</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    <a href="{{ download_link }}">Download Reconstructed File</a>
+    {% endif %}
+
+    <div class="stats">
+        <h2>Storage Statistics</h2>
+        <p><b>Total Uploaded Size:</b> {{ total_uploaded_size|floatformat:2 }} KB</p>
+        <p><b>Total Deduplicated Size:</b> {{ total_dedup_size|floatformat:2 }} KB</p>
+        <p><b>Space Saved:</b> {{ space_saved|floatformat:2 }} KB</p>
+    </div>
+
+    <div class="files">
+        <h2>Uploaded Files</h2>
+        <table>
+            <tr>
+                <th>Filename</th>
+                <th>Uploaded At</th>
+                <th>Actions</th>
+            </tr>
+            {% for file in files %}
+            <tr>
+                <td>{{ file.filename }}</td>
+                <td>{{ file.uploaded_at }}</td>
+                <td>
+                    <a href="{% url 'download_file' file.id %}">Download</a>
+                    <a href="{% url 'delete_file' file.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+
+</html>
