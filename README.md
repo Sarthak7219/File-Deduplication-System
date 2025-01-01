@@ -25,8 +25,8 @@ This system optimizes storage by eliminating data redundancy across various file
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
-   cd <project_directory>
+   git clone https://github.com/Sarthak7219/File-Deduplication-System.git
+   cd File-Deduplication-System
    ```
 
 2. Install dependencies:
